@@ -1,8 +1,11 @@
+import java.util.Arrays;
+
 public class Heap {
 
 //the actual storage structure for your heap
 
 private int[] arr;
+private int count = 0;
 
  
 
@@ -22,12 +25,14 @@ arr = new int[100];
 // 5 points
 
 public void add(int toAdd) {
+    arr[count] = toAdd;
 
- 
-
+    //recursive
+    siftUp(count);
+    count += 1;
+    printHeap();
 }
 
- 
 
 //remove the largest element of the heap (the root) and re-heapafy
 
@@ -41,7 +46,24 @@ public void removeMax() {}
 
 //3 points
 
-private void siftUp(int index) {}
+private int siftUp(int index) {
+    if(index<1) {
+        return 0;
+    }
+    // if parent is smaller than child
+    if(arr[(index - 1) /2] < arr[index]) {
+        System.out.println("recursive end (" + index + ")");
+        return 0;
+    }
+
+    System.out.println("swapped " + arr[index] + " with " + arr[(index - 1) /2]);
+    int parentNode = arr[(index - 1) /2];
+    
+    arr[(index - 1) /2] = arr[index];
+    arr[index] = parentNode;
+    
+    return siftUp((index - 1) /2);
+}
 
  
 
@@ -55,6 +77,15 @@ private void siftDown(int index) {}
 
 //4 points for syntax conventions.
 
- 
+private void printHeap() {
+    for(int i = 0; i<arr.length; i++) {
+        if(arr[i] > 0) {
+            System.out.println(arr[i]);
+        }
+        else {
+            break;
+        }
+    }
+}
 
 }
