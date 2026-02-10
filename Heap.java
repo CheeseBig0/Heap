@@ -38,9 +38,17 @@ public void add(int toAdd) {
 
 //5 points
 
-public void removeMax() {}
+public void removeMax() {
+    arr[0] = arr[count-1];
+    arr[count-1] = 0;
 
- 
+    count -= 1;
+    siftDown(0);
+
+    printHeap();
+}
+
+
 
 //this should check and alter the tree after an item is inserted
 
@@ -52,7 +60,7 @@ private int siftUp(int index) {
     }
     // if parent is smaller than child
     if(arr[(index - 1) /2] < arr[index]) {
-        System.out.println("recursive end (" + index + ")");
+        //System.out.println("recursive end (" + index + ")");
         return 0;
     }
 
@@ -65,27 +73,46 @@ private int siftUp(int index) {
     return siftUp((index - 1) /2);
 }
 
- 
+
 
 //this should check and alter the tree after an item is deleted.
 
 //3 points
 
-private void siftDown(int index) {}
+private int siftDown(int index) {
+    if(index>=count-1) {
+        return 0;
+    }
+
+    //left child is smaller than parent
+    if(arr[(2*index)+1] < arr[index] && arr[(2*index)+1] > 0) {
+        int savedNum = arr[(2*index)+1];
+        arr[(2*index)+1] = arr[index];
+        arr[index] = savedNum;
+        //System.out.println("sifted down left child");
+        return siftDown((2*index)+1);
+    }
+    
+    //right child is smaller than parent
+    if(arr[(2*index)+2] < arr[index] && arr[(2*index)+2] > 0) {
+        int savedNum = arr[(2*index)+2];
+        arr[(2*index)+2] = arr[index];
+        arr[index] = savedNum;
+        //System.out.println("sifted down right cild");
+        return siftDown((2*index)+2);
+    }
+    return 0;
+}
 
  
 
 //4 points for syntax conventions.
 
 private void printHeap() {
-    for(int i = 0; i<arr.length; i++) {
-        if(arr[i] > 0) {
-            System.out.println(arr[i]);
-        }
-        else {
-            break;
-        }
+    for(int i = 0; i<count; i++) {
+        System.out.println(arr[i]);
     }
+    System.out.println("Count: " + count);
 }
 
 }

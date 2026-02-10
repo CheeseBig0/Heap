@@ -11,6 +11,13 @@ public static void main(String[] args) {
   testHeap.add(30);
   testHeap.add(5);
 
+  System.out.println("--Now testing remove--");
+
+  testHeap.removeMax();
+  testHeap.removeMax();
+  testHeap.removeMax();
+
+
 }
 
 }
